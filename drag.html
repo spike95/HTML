@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.div1{
+		width:50px;
+		height:50px;
+		border: 1px solid black;
+		display:inline-block;
+	}
+	.div2{
+		width:200px;
+		height:200px;
+		border: 1px solid black;
+	}
+
+	</style>
+</head>
+<body>
+	<h5>拖放</h5>
+	<input id='ipt' type="text" draggable="true" value='可以被拖动的文本' draggable="false">
+	<p>
+		<span  class="div1" draggable="true">s1</span>
+		<span  class="div1" draggable="true">s2</span>
+		<span  class="div1" draggable="true">s3</span>
+	</p>
+	<hr>
+	<div id='div2' class="div2">回收站</div>
+	<script type="text/javascript">
+		var divs=document.getElementsByTagName('span');
+		var div2=document.getElementById('div2');
+		var ipt=document.getElementById('ipt');
+		var dargele;
+	
+
+		/*为input元素添加拖放事件*/
+		ipt.addEventListener('dragstart',function(e){
+			/*当拖动元素经过放置元素时取消默认阻止行为*/
+			e.dataTransfer.setData('text',this.value);
+			dargele=e.target;
+		})
+
+		/*为div拖动元素添加事件*/
+		for(var i=0,len=divs.length;i<len;i++){
+			divs[i].addEventListener('dragstart',function(e){
+				e.dataTransfer.setData('text',this.textContent);
+				dargele=e.target;
+			})
+		}
+
+
+		/*为放置元素添加事件*/
+		div2.addEventListener('dragover',function(e){
+			/*当拖动元素经过放置元素时取消默认阻止行为*/
+			e.preventDefault();
+		})
+
+		div2.addEventListener('drop',function(e){
+			/*当拖动元素在放置元素内部松开鼠标放置时*/
+			e.preventDefault();
+			this.innerHTML+="<br>"+e.dataTransfer.getData('text');
+			dargele.parentNode.removeChild(dargele);
+		})
+	</script>
+</body>
+</html>
