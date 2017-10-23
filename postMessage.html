@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fym1.index</title>
+</head>
+<body>
+	<h2>www.fym2.com</h2>
+	<iframe id='fym2' src="http://www.fym2.com" ></iframe>
+	<hr>
+	<h2>mmm.fym1.com</h2>
+	<iframe id='fym1' src="http://mmm.fym1.com" ></iframe>
+	<script type="text/javascript">
+		window.onload=function(){
+			var fym1=document.getElementById('fym1');
+			var fym2=document.getElementById('fym2');
+			var data1={
+				msg:"这个是www.fym1.com 发给mmm.fym1.com的",
+				name:"www.fym1.com"
+			}
+			var data2={
+				msg:"这个是www.fym1.com 发给www.fym2.com的",
+				name:"www.fym1.com"
+			}
+
+
+
+			fym1.contentWindow.postMessage(data1,'http://mmm.fym1.com')
+			fym2.contentWindow.postMessage(data2,'http://www.fym2.com')
+
+		}
+			window.addEventListener('message',function(e){
+					console.log(e.data);
+					console.log(JSON.stringify(e.data))
+			})
+
+	</script>
+</body>
+</html>
