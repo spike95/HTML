@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>媒体元素属性</title>
+</head>
+<body>
+	<!-- 视频 -->
+	<div>
+		<video id="video"  width="320" height="176" controls >
+		<source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="">
+		看到说明不支持
+		</video>
+	</div>
+	<hr>
+	<!-- 音频 -->
+	<div>
+		<audio id='audio' controls src="audio_video/a1.mp3">看到说明不支持</audio>
+	</div>
+	
+
+	<button id='btn_buffered'>已缓存时间</button>
+	<button id='btn_bufferedBytes'>已缓存字节</button>
+	<button id='btn_currentSrc'>媒体文件url </button>
+	<button id='btn_currentTime'>已播放秒数 </button>
+	<button id='btn_defaultPlaybackRate'>默认播放速度 </button>
+	<button id='btn_duration'>媒体总播放时间 </button>
+	<button id='btn_ended'>是否播放结束 </button>
+	<button id='btn_muted'>是否静音 </button>
+	<hr>
+	<button id='btn_networkState'>当前媒体网络连接状态 </button>
+	<button id='btn_paused'>是否暂停 </button>
+	<button id='btn_playbackRate'>默认播放速度 </button>
+	<button id='btn_played'>已播放时间 </button>
+	<button id='btn_readyState'>是否已播放就绪 </button>
+	<button id='btn_seekable'>时间范围 </button>
+	<button id='btn_volume'>音量减半</button>
+
+
+	<script type="text/javascript">
+		var video=document.getElementById('video');
+		var audio=document.getElementById('audio');
+		var btn_buffered=document.getElementById('btn_buffered');
+		var btn_bufferedBytes=document.getElementById('btn_bufferedBytes');
+		var btn_currentTime=document.getElementById('btn_currentTime');
+		var btn_defaultPlaybackRate=document.getElementById('btn_defaultPlaybackRate');
+		var btn_duration=document.getElementById('btn_duration');
+		var btn_ended=document.getElementById('btn_ended');
+		var btn_muted=document.getElementById('btn_muted');
+		var btn_networkState=document.getElementById('btn_networkState');
+		var btn_paused=document.getElementById('btn_paused');
+		var btn_playbackRate=document.getElementById('btn_playbackRate');
+		var btn_played=document.getElementById('btn_played');
+		var btn_readyState=document.getElementById('btn_readyState');
+		var btn_seekable=document.getElementById('btn_seekable');
+		var btn_volume=document.getElementById('btn_volume');
+
+
+
+
+
+
+		/*autoplay 布尔 是否自动播放 默认false*/
+		video.autoplay=false
+
+		/*buffered 对象 包含以缓冲了多少时间单位秒 Start: 0 End: 193.201633 一首歌193秒*/ 
+		btn_buffered.onclick=function(){
+			console.log("Start: " + audio.buffered.start(0)+ " End: " + audio.buffered.end(0));
+		}
+		
+		/*是否显示控件 布尔值 默认false*/
+		audio.controls=true;
+		
+		/*是否循环播放 布尔值 默认false*/
+		audio.loop=false;
+		
+		/*媒体文件url file:///E:/ife/web/web/audio_video/a1.mp3*/
+		btn_currentSrc.onclick=function(){
+			console.log(audio.currentSrc)
+		}
+
+		/*已播放秒数*/
+		btn_currentTime.onclick=function(){
+			console.log(audio.currentTime)
+		}
+		
+
+		/*取得或设置播放速度默认1.0 
+		  给开发用 需要load()重新加载后生效*/
+		btn_defaultPlaybackRate.onclick=function(){
+			console.log(audio.defaultPlaybackRate)
+		}
+
+		/*媒体文件总时长*/
+		btn_duration.onclick=function(){
+			console.log(audio.duration)
+		}
+
+		/*是否播放结束 布尔*/
+		btn_ended.onclick=function(){
+			console.log(audio.ended)
+		}
+
+		/*是否静音 布尔e*/
+		btn_muted.onclick=function(){
+			console.log(audio.muted)
+		}
+		
+		/*当前媒体网络连接状态
+		0 = NETWORK_EMPTY - 音频/视频尚未初始化
+		1 = NETWORK_IDLE - 音频/视频是活动的且已选取资源，但并未使用网络
+		2 = NETWORK_LOADING - 浏览器正在下载数据
+		3 = NETWORK_NO_SOURCE - 未找到音频/视频来源
+		*/
+		btn_networkState.onclick=function(){
+			console.log(video.networkState)
+		}
+
+		/*是否暂停 布尔*/
+		btn_paused.onclick=function(){
+			console.log(audio.paused)
+		}
+		
+		/*取得或设置播放速度默认1.0  给用户用 无需load()*/
+		btn_playbackRate.onclick=function(){
+			console.log(audio.playbackRate)
+		}
+
+		/*已播放时间范围 */
+		btn_played.onclick=function(){
+			console.log("Start: " + audio.played.start(0)+ " End: " + audio.played.end(0));
+		}
+		
+
+		/*媒体是否已播放就绪
+		0 = HAVE_NOTHING - 没有关于音频/视频是否就绪的信息
+		1 = HAVE_METADATA - 关于音频/视频就绪的元数据
+		2 = HAVE_CURRENT_DATA - 关于当前播放位置的数据是可用的，但没有足够的数据来播放下一帧/毫秒
+		3 = HAVE_FUTURE_DATA - 当前及至少下一帧的数据是可用的
+		4 = HAVE_ENOUGH_DATA - 可用数据足以开始播放
+		*/
+		btn_readyState.onclick=function(){
+			console.log(audio.readyState);
+		}
+	
+		/*时间范围包括未缓冲完毕的
+		seekable 属性返回 TimeRanges 对象。
+		TimeRanges 对象表示音频/视频中用户可寻址的范围。
+		可寻址范围指的是用户在音频/视频中可寻址（移动播放位置）的时间范围。
+		对于流视频，通常可以寻址到视频中的任何位置，即使其尚未完成缓冲。
+		*/
+		btn_seekable.onclick=function(){
+			console.log("Start: " + audio.seekable.start(0)+ " End: " + audio.seekable.end(0));//Start: 0 End: 7.471
+		}
+
+		/*videoHeight,videoWidth范围视频元素的高度宽度，只能用于video*/
+	
+		/*设置或取得音量 0.0~1.0*/
+		btn_volume.onclick=function(){
+			console.log(audio.volume);
+		}
+
+	</script>
+</body>
+</html>

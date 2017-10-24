@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>媒体元素时间</title>
+</head>
+<body>
+	<!-- 视频 -->
+	<div>
+		<video id="video"  width="320" height="176" controls >
+		<source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4" type="">
+		看到说明不支持
+		</video>
+	</div>
+	<hr>
+	<!-- 音频 -->
+	<div>
+		<audio id='audio' controls src="audio_video/a1.mp3">看到说明不支持</audio>
+	</div>
+	<button id='changrate'>速度变慢</button>
+	
+	<script type="text/javascript">
+		var audio=document.getElementById('audio');	
+		var video=document.getElementById('video');
+		
+
+		/*
+		当音频/视频处于加载过程中时，会依次发生以下事件：
+		1.loadstart
+		2.durationchange
+		3.loadedmetadata
+		4.loadeddata
+		5.progress
+		6.canplay
+		7.canplaythrough
+		*/
+
+		
+
+
+		/*abort 事件在音频/视频(audio/video)终止加载时触发。
+		  该事件是在多媒体数据终止下载时触发，而不是发生错误时触发。
+		  Windows 7 中的 Internet Explorer 11 不支持 abort 事件。
+		*/
+		audio.onabort = function() {
+			console.log("视频终止加载");
+		};
+		
+		/*当浏览器能够开始播放指定的音频/视频时，会发生 canplay 事件。*/
+		audio.oncanplay = function() {
+			console.log("可以播放");
+		};
+
+		/*当浏览器预计能够在不停下来进行缓冲的情况下持续播放指定的音频/视频时*/
+		audio.oncanplaythrough = function() {
+			console.log("能够不停顿地一直播放");
+		};
+
+		/*当指定音频/视频的时长数据发生变化时，会发生 durationchange 事件。
+			当音频/视频加载后，时长将由 "NaN" 变为音频/视频的实际时长。*/
+		audio.ondurationchange= function() {
+			console.log("ondurationchange");
+		};
+
+		/*ended 事件在音频/视频(audio/video)播放完成后触发。
+			该事件通常用于提示播放完成的信息，例如 "谢谢收听", "谢谢观看" 等。*/
+		audio.onended= function() {
+			console.log("结束了");
+		};
+	
+		/*音频/视频出错时触发*/
+		audio.onerror= function() {
+			console.log("报错了error");
+		};
+
+
+		/*当当前帧的数据已加载，但没有足够的数据来播放指定音频/视频的下一帧时*/
+		audio.onloadeddata= function() {
+			console.log("onloadeddata");
+		};
+
+		/*当指定的音频/视频的元数据已加载时，会发生 loadedmetadata 事件。
+			音频/视频的元数据包括：时长、尺寸（仅视频）以及文本轨道。*/
+		audio.onloadedmetadata= function() {
+			console.log("onloadedmetadata");
+		};
+
+
+		/*当浏览器开始寻找指定的音频/视频时，会发生 loadstart 事件。即当加载过程开始时。*/
+		audio.onloadstart= function() {
+			console.log("onloadstart");
+		};
+		
+		/*暂停时触发*/
+		audio.onpause= function() {
+			console.log("onpause");
+		};
+		
+		/*play 事件在音频/视频(audio/video)开始播放时触发。*/
+		audio.onplay= function() {
+			console.log("onplay");
+		};
+		
+		/*playing 事件在音频/视频(audio/video)因缓冲而暂停或停止后已就绪时触发。*/
+		audio.onplaying= function() {
+			console.log("onplaying");
+		};
+
+		/*当浏览器正在下载指定的音频/视频时，会发生 progress 事件。
+			当音频/视频处于加载过程中时，会依次发生以下事件：*/
+		audio.onprogress= function() {
+			console.log("onprogress");
+		};
+		
+
+		/*播放速度改变时触发*/
+		document.getElementById('changrate').onclick=function(){
+			audio.playbackRate=0.5;
+		}
+		audio.onratechange= function() {
+			console.log("onratechange");
+		};
+
+		/*seeked 事件在用户已移动/跳跃到音频/视频（audio/video）中的新位置时触发。*/
+		audio.onseeked = function() {
+			//console.log(audio.currentTime);
+		};
+		
+		/* seeking 事件在用户开始移动/跳跃到新的音频/视频（audio/video）播放位置时触发。*/
+		audio.onseeking = function() {
+			console.log('拖动进度条');
+		};
+
+	</script>
+</body>
+</html>
